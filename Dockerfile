@@ -5,15 +5,15 @@ ENV FFMPEG_VERSION 3.4
 ENV COMSKIP_VERSION 0.82.003
 
 # Get Build deps
-RUN	apk update && apk add	\
+RUN apk update && apk add	\
   gcc binutils-libs binutils build-base libgcc make pkgconf pkgconfig \
   openssl openssl-dev ca-certificates pcre \
   musl-dev libc-dev pcre-dev zlib-dev
   
 # Install Comskip
-RUN cd /tmp && wget https://github.com/erikkaashoek/Comskip/archive/v{COMSKIP_VERSION}.tar.gz \
-  && tar zxf v{COMSKIP_VERSION}.tar.gz && rm v{COMSKIP_VERSION}.tar.gz
-RUN cd /tmp/v{COMSKIP_VERSION} \
+RUN cd /tmp && wget https://github.com/erikkaashoek/Comskip/archive/v${COMSKIP_VERSION}.tar.gz \
+ && tar zxf v${COMSKIP_VERSION}.tar.gz && rm v${COMSKIP_VERSION}.tar.gz
+RUN cd /tmp/v${COMSKIP_VERSION} \
  && ./autogen.sh \
  && ./configure \
  && make && make install && make distclean
