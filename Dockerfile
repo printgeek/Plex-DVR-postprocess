@@ -62,4 +62,4 @@ VOLUME /opt/PlexComskip
 
 COPY PlexComskip.conf /opt/PlexComskip/PlexComskip.conf
 
-CMD ["/opt/nginx/sbin/nginx"]  
+CMD ["/opt/PlexComskip/PlexComskip.py"]  
