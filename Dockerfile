@@ -1,4 +1,4 @@
-FROM alpine:3.6
+FROM alpine:3.3
 MAINTAINER J Hawkins <printgeek@gmail.com>
 
 ENV FFMPEG_VERSION 3.4
@@ -11,8 +11,8 @@ RUN apk update && apk add \
   musl-dev libc-dev pcre-dev zlib-dev
   
 # Install Comskip
-RUN cd /tmp && wget http://prdownloads.sourceforge.net/argtable/argtable2-13.tar.gz \
- && tar zxf argtable2-13.tar.gz && rm argtable2-13.tar.gz
+RUN cd /tmp && wget http://prdownloads.sourceforge.net/argtable/argtable2-13.tar.gz
+RUN cd /tmp && tar zxf argtable2-13.tar.gz && rm argtable2-13.tar.gz
 RUN cd /tmp/argtable2-13 && make && make install && make distclean
 
 RUN cd /tmp && wget https://github.com/erikkaashoek/Comskip/archive/v${COMSKIP_VERSION}.tar.gz \
