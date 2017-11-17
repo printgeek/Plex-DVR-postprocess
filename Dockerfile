@@ -8,9 +8,13 @@ ENV COMSKIP_VERSION 0.82.003
 RUN apk update && apk add \
   gcc binutils-libs binutils build-base libgcc make pkgconf pkgconfig \
   openssl openssl-dev ca-certificates pcre autoconf automake libtool \
-  libargtable2-0 musl-dev libc-dev pcre-dev zlib-dev
+  musl-dev libc-dev pcre-dev zlib-dev
   
 # Install Comskip
+RUN cd /tmp && wget http://prdownloads.sourceforge.net/argtable/argtable2-13.tar.gz \
+ && tar zxf argtable2-13.tar.gz && rm argtable2-13.tar.gz
+RUN cd /tmp/argtable2-13 && make && make install && make distclean
+
 RUN cd /tmp && wget https://github.com/erikkaashoek/Comskip/archive/v${COMSKIP_VERSION}.tar.gz \
  && tar zxf v${COMSKIP_VERSION}.tar.gz && rm v${COMSKIP_VERSION}.tar.gz
 RUN cd /tmp/Comskip-${COMSKIP_VERSION} \
