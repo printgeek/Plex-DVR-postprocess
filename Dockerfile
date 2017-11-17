@@ -8,7 +8,7 @@ ENV COMSKIP_VERSION 0.82.003
 RUN apk update && apk add \
   gcc binutils-libs binutils build-base libgcc make pkgconf pkgconfig \
   openssl openssl-dev ca-certificates pcre autoconf automake libtool \
-  musl-dev libc-dev pcre-dev zlib-dev
+  argtable2 musl-dev libc-dev pcre-dev zlib-dev
   
 # Install Comskip
 RUN cd /tmp && wget https://github.com/erikkaashoek/Comskip/archive/v${COMSKIP_VERSION}.tar.gz \
