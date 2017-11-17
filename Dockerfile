@@ -3,6 +3,8 @@ MAINTAINER J Hawkins <printgeek@gmail.com>
 
 ENV FFMPEG_VERSION 3.4
 ENV COMSKIP_VERSION 0.82.003
+ENV LD_LIBRARY_PATH /usr/local/lib/:$LD_LIBRARY_PATH
+ENV PKG_CONFIG_PATH /usr/local/lib/pkgconfig/:$PKG_CONFIG_PATH
 
 # Get Build deps
 RUN apk update && apk add \
