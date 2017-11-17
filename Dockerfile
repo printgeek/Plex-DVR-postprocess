@@ -15,11 +15,8 @@ RUN cd /tmp && wget http://prdownloads.sourceforge.net/argtable/argtable2-13.tar
 RUN cd /tmp && tar zxf argtable2-13.tar.gz && rm argtable2-13.tar.gz
 RUN cd /tmp/argtable2-13 && ./configure && make && make install && make clean
 
-RUN ls /usr/local/lib
-RUN find / -name "argtable2.pc"
-
 RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
-RUN export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/
+RUN export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig/
 
 RUN cd /tmp && wget https://github.com/erikkaashoek/Comskip/archive/v${COMSKIP_VERSION}.tar.gz \
  && tar zxf v${COMSKIP_VERSION}.tar.gz && rm v${COMSKIP_VERSION}.tar.gz
