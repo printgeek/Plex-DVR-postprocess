@@ -12,25 +12,13 @@ RUN apk update && apk add \
   openssl openssl-dev ca-certificates pcre autoconf automake libtool \
   musl-dev libc-dev pcre-dev zlib-dev
   
-# Install Comskip
+
 RUN cd /tmp && wget http://prdownloads.sourceforge.net/argtable/argtable2-13.tar.gz
 RUN cd /tmp && tar zxf argtable2-13.tar.gz && rm argtable2-13.tar.gz
 RUN cd /tmp/argtable2-13 && ./configure && make && make install && make clean
 
 RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 RUN export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig/
-
-RUN cd /tmp && wget https://github.com/erikkaashoek/Comskip/archive/v${COMSKIP_VERSION}.tar.gz \
- && tar zxf v${COMSKIP_VERSION}.tar.gz && rm v${COMSKIP_VERSION}.tar.gz
-RUN cd /tmp/Comskip-${COMSKIP_VERSION} \
- && ./autogen.sh \
- && ./configure \
- && make && make install && make distclean
-
-RUN mkdir -p /opt/PlexComskip && cd /opt/PlexComskip && \
-    wget https://raw.githubusercontent.com/ekim1337/PlexComskip/master/PlexComskip.py && \
-    wget https://raw.githubusercontent.com/ekim1337/PlexComskip/master/comskip.ini && \ 
-    touch /var/log/PlexComskip.log
 
 RUN apk add --update nasm yasm-dev lame-dev libogg-dev x264-dev libvpx-dev libvorbis-dev x265-dev freetype-dev libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev
 RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
@@ -64,6 +52,20 @@ RUN cd /tmp/ffmpeg-${FFMPEG_VERSION} && \
   --enable-openssl \
   --disable-debug \
   && make && make install && make distclean
+  
+# Install Comskip
+RUN cd /tmp && wget https://github.com/erikkaashoek/Comskip/archive/v${COMSKIP_VERSION}.tar.gz \
+ && tar zxf v${COMSKIP_VERSION}.tar.gz && rm v${COMSKIP_VERSION}.tar.gz
+RUN cd /tmp/Comskip-${COMSKIP_VERSION} \
+ && ./autogen.sh \
+ && ./configure \
+ && make && make install && make distclean
+
+RUN mkdir -p /opt/PlexComskip && cd /opt/PlexComskip && \
+    wget https://raw.githubusercontent.com/ekim1337/PlexComskip/master/PlexComskip.py && \
+    wget https://raw.githubusercontent.com/ekim1337/PlexComskip/master/comskip.ini && \ 
+    touch /var/log/PlexComskip.log
+    
   
 RUN rm -rf /var/cache/* /tmp/*
 
