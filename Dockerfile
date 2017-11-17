@@ -13,7 +13,7 @@ RUN apk update && apk add \
 # Install Comskip
 RUN cd /tmp && wget http://prdownloads.sourceforge.net/argtable/argtable2-13.tar.gz
 RUN cd /tmp && tar zxf argtable2-13.tar.gz && rm argtable2-13.tar.gz
-RUN cd /tmp/argtable2-13 && make && make install && make distclean
+RUN cd /tmp/argtable2-13 && ./configure && make && make install && make distclean
 
 RUN cd /tmp && wget https://github.com/erikkaashoek/Comskip/archive/v${COMSKIP_VERSION}.tar.gz \
  && tar zxf v${COMSKIP_VERSION}.tar.gz && rm v${COMSKIP_VERSION}.tar.gz
